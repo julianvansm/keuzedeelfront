@@ -20,3 +20,13 @@ body {
   background-position: center;
   transition: filter ease;
 }
+.image-list{
+  min-width: 400px;
+  min-height: 350px;
+  max-height: 350px;
+  max-width: 400px;
+  margin: 20px;
+  border: solid gray 2px;
+  border-radius: 10px;
+  overflow: hidden;
+}
