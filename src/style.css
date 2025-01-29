@@ -8,9 +8,6 @@ body {
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 }
-h1{
-
-}
 .sticky {
   position: sticky;
   top: 0;
