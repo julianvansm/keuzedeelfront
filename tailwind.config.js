@@ -9,7 +9,6 @@ export default {
       colors: {
         'Custom1': '#ec50ef',
         'Custom2': '#313131',
-
       }
     }
   },

@@ -8,17 +8,21 @@ body {
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 }
+h1{
 
+}
 .sticky {
   position: sticky;
   top: 0;
   font-size: 20px;
 }
 .background-image {
-  background-image: url("public/bg.jpg");
+  background-image: url("public/bg.webp");
   background-size: cover;
   background-position: center;
-  transition: filter ease;
+  filter: brightness(1) blur(5px);
+  will-change: transform, opacity;
+
 }
 .image-list{
   min-width: 400px;
@@ -29,4 +33,12 @@ body {
   border: solid gray 2px;
   border-radius: 10px;
   overflow: hidden;
+}
+.image-cover {
+  min-height: 60%;
+  max-height: 60%;
+  justify-self: center;
+}
+.text-cover{
+  min-height: 40%;
 }

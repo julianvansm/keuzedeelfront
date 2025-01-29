@@ -4,22 +4,16 @@
     <div ref="intro"
          style="filter: blur(20px);"
          :style="{ filter: `brightness(${this.brightness}) blur(${this.blur *3}px)`  }"
-         class="background-image duration-300 sticky h-screen flex items-center justify-center z-0">
+         class="background-image sticky h-screen flex items-center justify-center z-0">
       <div class="w-full h-full relative">
         <div class="absolute flex-col md:top-1/4 flex md:justify-center md:flex-row flex-nowrap w-full px-10">
-
           <hgroup class="max-md:pt-20 sm:text-3xl text-xl text-white" style=" text-shadow: 2px 2px 2px black;">
             <h1 class="max-sm:text-3xl text-5xl">Hoi dit is een klein voorbeeldje voor u. </h1>
             <h2 class="text-animaton max-sm:text-3xl text-5xl">gemaakt door <span>Julian</span>,</h2>
             <h3 class="max-sm:text-2xl text-3xl">nog een beetje tekst</h3>
           </hgroup>
-
-          <div style="" class="cat-responsive absolute right-0 top-1/2">
-
-          </div>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -34,7 +28,7 @@
         </div>
       </div>
     </div>
-    <div class=" z-10 top-0 bg-Custom2 font-sans flex flex-col sticky justify-evenly items-center">
+    <div class=" z-10 top-0 bg-Custom2 flex flex-col sticky justify-evenly items-center">
       <div class="duration-200 text-2xl text-white max-sm:text-xl sm:p-2" style="max-width: 1002px;">
         <hgroup>
           <h2 class="mb-6">
@@ -71,82 +65,55 @@
 
   <div class="scrollable flex bg-Custom2 overflow-x-scroll z-20 sticky flex-nowrap">
     <PhotoExample v-for="project in projects.slice().reverse()"
-                 :project="project"/>
-
+                  :project="project"/>
   </div>
 
 </template>
 <script>
-import {ref, onMounted, onUnmounted, defineComponent} from 'vue';
+import {ref, onMounted, onUnmounted, defineComponent} from "vue";
 import PhotoExample from "./PhotoExample.vue";
 
 export default defineComponent({
   components: {PhotoExample},
-  data() {
-    return {
-      projects: [
-        {
-          title: 'titel',
-          date: 'Datum',
-          description: "Omschrijving \n\n Lorem ipsum dolor sit amet, consectetur\n" +
-              "adipisicing elit. Amet culpa dolor, doloribus ducimus enim eos, fugit ipsa nobis nostrum, officiis omnis\n" +
-              "quis reiciendis sapiente ut voluptatem. Ab impedit maiores nam. Lorem ipsum dolor sit amet, consectetur\n" +
-              "adipisicing elit. Assumenda beatae blanditiis consequatur eaque eligendi exercitationem, iure necessitatibus\n" +
-              "nemo odit, officia perspiciatis provident quasi reprehenderit sapiente voluptate? Molestias nulla voluptas\n" +
-              "voluptatum",
-          image: '/public/bg.jpg',
-        },
-        {
-          title: 'titel2',
-          date: 'Datum',
-          description: "Omschrijving \n\n Lorem ipsum dolor sit amet, consectetur\n" +
-              "adipisicing elit. Amet culpa dolor, doloribus ducimus enim eos, fugit ipsa nobis nostrum, officiis omnis\n" +
-              "quis reiciendis sapiente ut voluptatem. Ab impedit maiores nam. Lorem ipsum dolor sit amet, consectetur\n" +
-              "adipisicing elit. Assumenda beatae blanditiis consequatur eaque eligendi exercitationem, iure necessitatibus\n" +
-              "nemo odit, officia perspiciatis provident quasi reprehenderit sapiente voluptate? Molestias nulla voluptas\n" +
-              "voluptatum",
-          image: '/public/test.png',
-        },
-
-      ],
-    }
-  },
   setup() {
     const introElement = ref(null);
     const brightness = ref(1);
     const blur = ref(0);
+
     const updateBrightness = () => {
       if (!introElement.value) return;
-
-      const rectangle = introElement.value.getBoundingClientRect();
+      const rect = introElement.value.getBoundingClientRect();
       const screenHeight = window.innerHeight;
-
-      brightness.value = (rectangle.y / screenHeight);
-      console.log(brightness.value)
+      brightness.value = Math.max(0, Math.min(1, rect.y / screenHeight));
       blur.value = 1 - brightness.value;
-      if (blur.value < 0) {
-        blur.value = 0;
-      }
-      if (brightness.value > 1) {
-        brightness.value = 1;
-      }
     };
 
     onMounted(() => {
       introElement.value = document.getElementById("about");
-      window.addEventListener('scroll', updateBrightness);
+      window.addEventListener("scroll", updateBrightness);
     });
 
     onUnmounted(() => {
-      window.removeEventListener('scroll', updateBrightness);
+      window.removeEventListener("scroll", updateBrightness);
     });
 
-    return {
-      introElement,
-      brightness,
-      blur,
-    };
+    return {introElement, brightness, blur};
   },
+  data() {
+    return {
+      projects: [
+        {title: "Titel 1", date: "Datum", description: "Omschrijving", image: "/public/bg.webp"},
+        {title: "Titel 2", date: "Datum", description: "Omschrijving", image: "/public/bg.webp"},
+        {title: "Titel 3", date: "Datum", description: "Omschrijving", image: "/public/vite.svg"},
+        {title: "Titel 1", date: "Datum", description: "Omschrijving", image: "/public/bg.webp"},
+        {title: "Titel 2", date: "Datum", description: "Omschrijving", image: "/public/bg.webp"},
+        {title: "Titel 3", date: "Datum", description: "Omschrijving", image: "/public/vite.svg"},
+        {title: "Titel 1", date: "Datum", description: "Omschrijving", image: "/public/bg.webp"},
+        {title: "Titel 2", date: "Datum", description: "Omschrijving", image: "/public/bg.webp"},
+        {title: "Titel 3", date: "Datum", description: "Omschrijving", image: "/public/vite.svg"}
+      ]
+    };
+  }
 });
 </script>
 

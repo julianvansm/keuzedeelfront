@@ -1,10 +1,10 @@
 <template>
  <div class="image-list ">
-   <img class=" object-cover"
-        :src="project.image"
-        alt="hoi"
-   />
-   <div class="bg-white h-fit p-2">
+    <img class=" image-cover"
+         :src="project.image"
+         alt="hoi"
+    />
+   <div class="text-cover bg-white h-fit p-2">
      <p>{{project.title}}</p>
      <p>{{project.description}}</p>
    </div>
@@ -12,17 +12,8 @@
 </template>
 
 <script>
-
 export default {
-
-
-  props: {
-    project: Object,
-  },
-
-  methods: {
-
-  },
+  props: { project: Object }
 };
 </script>
 
